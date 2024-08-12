@@ -43,7 +43,7 @@ runs:
     - name: Update Tag
       working-directory: ./repository
       run: |
-        yq write --inplace inputs.VALUES_FILE_PATH ${{ inputs.TAG }} "${{ inputs.VALUE_NAME }}"
+        yq -i '.${{ inputs.VALUE_NAME }} = "${{ inputs.TAG }}"' ${{ inputs.VALUES_FILE_PATH }}
       shell: bash
 
     - name: Commit & Push
