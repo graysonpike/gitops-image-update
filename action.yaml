@@ -43,7 +43,7 @@ runs:
     - name: Update Tag
       working-directory: ./repository
       run: |
-        sed -i 's/${{ inputs.VALUE_NAME }}: .*$/${{ inputs.VALUE_NAME }}: "'${{ inputs.TAG }}'"/g' ${{ inputs.VALUES_FILE_PATH }}
+        yq e '.${{ inputs.VALUE_NAME }} = "${{ inputs.TAG }}"' -i ${{ inputs.VALUES_FILE_PATH }}
       shell: bash
 
     - name: Commit & Push
