@@ -29,6 +29,10 @@ inputs:
     description: "(Personal) Access Token for the GitOps repository. Defaults to the GITHUB_TOKEN."
     required: true
     default: ${{ github.token }}
+  DEPLOYMENT_NAME:
+    description: "Name of the deployment e.g. 'triplezip-api'"
+    required: true
+    default: "deployment"
 
 runs:
   using: "composite"
@@ -52,7 +56,7 @@ runs:
         git config user.name "${{ github.actor }}"
         git config user.email "${{ github.actor }}@users.noreply.github.com"
         git add .
-        git commit --allow-empty -m "Update revision of '${{ inputs.VALUE_NAME }}'' to ${{ inputs.TAG }}"
+        git commit --allow-empty -m "Update '${{ inputs.DEPLOYMENT_NAME }}'' image to ${{ inputs.TAG }}"
         git pull --rebase
         git push
       shell: bash
