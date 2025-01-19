@@ -11,7 +11,7 @@ jobs:
         runs-on: self-hosted
         steps:
             - name: Update image tag in resy-bot-gitops repository
-                uses: 'graysonpike/gitops-image-update'
+                uses: 'graysonpike/gitops-image-update@237b93bfb95f7a049fda0509a33c03ede12512c8'
                 with:
                 REPOSITORY_NAME: 'TripleZip/triplezip-gitops'
                 ACCESS_TOKEN: ${{ secrets.GITOPS_REPO_PAT }}
