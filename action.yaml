@@ -15,11 +15,11 @@ inputs:
   VALUES_FILE_PATH:
     description: 'Path to the values file in the GitOps repository e.g. "./deployments/helmCharts/projects/AdWert-IT/values.yaml"'
     required: true
-  VALUE_NAME:
-    description: 'Name of the value in the values file e.g. "frontendImageSHA"'
+  VALUE_PATH:
+    description: 'Path of the value in the values file e.g. "spec.template.spec.containers[0].image"'
     required: true
-  TAG:
-    description: "Name of the Image Tag e.g. 'v1.0.0' or 'e0f9a8b'"
+  IMAGE:
+    description: "Name of the Image e.g. '593793025909.dkr.ecr.us-east-1.amazonaws.com/triplezip-api:e0f9a8b'"
     required: true
   USERNAME:
     description: "Username for the GitOps repository. Defaults to the GITHUB_ACTOR."
@@ -47,7 +47,7 @@ runs:
     - name: Update Tag
       working-directory: ./repository
       run: |
-        yq -i '.${{ inputs.VALUE_NAME }} = "${{ inputs.TAG }}"' ${{ inputs.VALUES_FILE_PATH }}
+        yq -i '.${{ inputs.VALUE_PATH }} = "${{ inputs.TAG }}"' ${{ inputs.VALUES_FILE_PATH }}
       shell: bash
 
     - name: Commit & Push
@@ -56,7 +56,7 @@ runs:
         git config user.name "${{ github.actor }}"
         git config user.email "${{ github.actor }}@users.noreply.github.com"
         git add .
-        git commit --allow-empty -m "Update '${{ inputs.DEPLOYMENT_NAME }}'' image to ${{ inputs.TAG }}"
+        git commit --allow-empty -m "Update '${{ inputs.DEPLOYMENT_NAME }}' image to ${{ inputs.IMAGE }}"
         git pull --rebase
         git push
       shell: bash
