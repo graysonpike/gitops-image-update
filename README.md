@@ -13,11 +13,11 @@ jobs:
             - name: Update image tag in resy-bot-gitops repository
                 uses: 'graysonpike/gitops-image-update@237b93bfb95f7a049fda0509a33c03ede12512c8'
                 with:
-                REPOSITORY_NAME: 'TripleZip/triplezip-gitops'
-                ACCESS_TOKEN: ${{ secrets.GITOPS_REPO_PAT }}
-                BRANCH: "main"
-                VALUES_FILE_PATH: 'api/deployment.yaml'
-                VALUE_PATH: 'spec.template.spec.containers[0].image'
-                IMAGE: 593793025909.dkr.ecr.us-east-1.amazonaws.com/triplezip-api:${{ steps.extract_tag.outputs.TAG }}
-                DEPLOYMENT_NAME: 'triplezip-api'
+                    REPOSITORY_NAME: 'TripleZip/triplezip-gitops'
+                    ACCESS_TOKEN: ${{ secrets.GITOPS_REPO_PAT }}
+                    BRANCH: "main"
+                    VALUES_FILE_PATH: 'api/deployment.yaml'
+                    VALUE_PATH: 'spec.template.spec.containers[0].image'
+                    IMAGE: 593793025909.dkr.ecr.us-east-1.amazonaws.com/triplezip-api:${{ steps.extract_tag.outputs.TAG }}
+                    DEPLOYMENT_NAME: 'triplezip-api'
 ```
