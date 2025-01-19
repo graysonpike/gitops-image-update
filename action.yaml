@@ -47,7 +47,7 @@ runs:
     - name: Update Tag
       working-directory: ./repository
       run: |
-        yq -i '.${{ inputs.VALUE_PATH }} = "${{ inputs.TAG }}"' ${{ inputs.VALUES_FILE_PATH }}
+        yq -i '.${{ inputs.VALUE_PATH }} = "${{ inputs.IMAGE }}"' ${{ inputs.VALUES_FILE_PATH }}
       shell: bash
 
     - name: Commit & Push
