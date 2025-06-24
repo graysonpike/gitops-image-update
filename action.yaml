@@ -30,6 +30,12 @@ inputs:
   VALUE_PATH_3:
     description: 'Optional: Path of the value in the third values file'
     required: false
+  VALUES_FILE_PATH_4:
+    description: 'Optional: Path to a fourth values file in the GitOps repository'
+    required: false
+  VALUE_PATH_4:
+    description: 'Optional: Path of the value in the fourth values file'
+    required: false
   IMAGE:
     description: "Name of the Image e.g. '593793025909.dkr.ecr.us-east-1.amazonaws.com/triplezip-api:e0f9a8b'"
     required: true
@@ -65,6 +71,9 @@ runs:
         fi
         if [ ! -z "${{ inputs.VALUES_FILE_PATH_3 }}" ] && [ ! -z "${{ inputs.VALUE_PATH_3 }}" ]; then
           yq -i '.${{ inputs.VALUE_PATH_3 }} = "${{ inputs.IMAGE }}"' ${{ inputs.VALUES_FILE_PATH_3 }}
+        fi
+        if [ ! -z "${{ inputs.VALUES_FILE_PATH_4 }}" ] && [ ! -z "${{ inputs.VALUE_PATH_4 }}" ]; then
+          yq -i '.${{ inputs.VALUE_PATH_4 }} = "${{ inputs.IMAGE }}"' ${{ inputs.VALUES_FILE_PATH_4 }}
         fi
       shell: bash
 
